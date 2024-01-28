@@ -3,7 +3,7 @@ import "./styles.css";
 import TicTacToeContainer from "./TicTacToeContainer";
 
 const TicTacToeHome = () => {
-  const [boardSize, setBoardSize] = useState(3);
+  const [boardSize, setBoardSize] = useState("");
   const [showGame, setShowGame] = useState(false);
 
   const onPlayClick = () => {
@@ -11,7 +11,12 @@ const TicTacToeHome = () => {
   };
 
   const onInputChange = (e) => {
-    setBoardSize(Number(e.target.value));
+    const value = e.target.value
+     
+    // Allow empty input or single-digit numbers from 1 to 9
+    if (value === "" || (/^[1-9]$/.test(value) && value.length <= 1)) {
+            setBoardSize(value);
+      }
   };
 
   return (
@@ -20,16 +25,16 @@ const TicTacToeHome = () => {
         <h1>Tic Tac Toe</h1>
       </header>
       {showGame ? (
-        <TicTacToeContainer boardSize={boardSize || 3} />
+        <TicTacToeContainer boardSize={Number(boardSize) || 3} />
       ) : (
         <div className="homeInfo">
           <label>Enter the board size:</label>
           <input
             className="inputSize"
-            type="number"
+            type="text"
             onChange={onInputChange}
             value={boardSize}
-            max={10}
+            max="1"            
             aria-label="board-size"
           />
           <button
