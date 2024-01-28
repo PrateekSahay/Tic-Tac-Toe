@@ -1,5 +1,5 @@
 // Square.js
-import React from 'react';
+import React from "react";
 
 const Square = ({ value, onClick, disabled }) => (
   <button className="square" onClick={onClick} disabled={disabled}>
