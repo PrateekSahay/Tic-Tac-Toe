@@ -29,6 +29,7 @@ const TicTacToeHome = () => {
             type="number"
             onChange={onInputChange}
             value={boardSize}
+            max={10}
             aria-label="board-size"
           />
           <button
