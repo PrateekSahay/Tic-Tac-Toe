@@ -1,6 +1,6 @@
 # Tic Tac Toe
 
-Live Demo: [a link](https://tictactoebyprateek.netlify.app/)
+Live Demo: [Play Tic Tac Toe ](https://tictactoebyprateek.netlify.app/)
 
 ## Available Scripts
 
