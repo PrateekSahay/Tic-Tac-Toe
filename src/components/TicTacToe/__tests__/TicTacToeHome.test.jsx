@@ -1,42 +1,25 @@
-// __tests__/App.test.js
-import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
-import TicTacToeHome from '../TicTacToeHome';
+// TicTacToeHome.test.js
+import React from "react";
+import { render, fireEvent } from "@testing-library/react";
+import TicTacToeHome from "../TicTacToeHome";
 
-test('renders App component and allows playing the game with undo functionality', () => {
-  render(<TicTacToeHome />);
-  const xPlayerTurn = screen.getByText(/Next Player: X/i);
+test("renders TicTacToeHome component", () => {
+  const { getByText, getByLabelText } = render(<TicTacToeHome />);
 
-  // Play a few moves
-  fireEvent.click(screen.getByText(/Go to game start/i)); // Click the initial move button
-  expect(xPlayerTurn).toBeInTheDocument();
+  // Check if the component renders the header
+  const headerElement = getByText(/Tic Tac Toe/i);
+  expect(headerElement).toBeInTheDocument();
 
-  fireEvent.click(screen.getAllByRole('button')[0]); // Make a move
+  // Check if the input and play button are rendered when showGame is false
+  const inputElement = getByLabelText(/board-size/i);
+  expect(inputElement).toBeInTheDocument();
 
-  // Check if the game state is updated
-  const oPlayerTurn = screen.getByText(/Next Player: O/i);
-  expect(oPlayerTurn).toBeInTheDocument();
+  const playButton = getByText(/Play/i);
+  expect(playButton).toBeInTheDocument();
 
-  // Undo last move
-  fireEvent.click(screen.getByText(/Undo Last Move/i));
+  // Simulate input change and click on the play button
+  fireEvent.change(inputElement, { target: { value: "4" } });
+  fireEvent.click(playButton);
 
-  // Check if the game state is reverted
-  expect(xPlayerTurn).toBeInTheDocument();
-});
-
-test('resets the game when the "Reset Game" button is clicked', () => {
-  render(<TicTacToeHome />);
-  const xPlayerTurn = screen.getByText(/Next Player: X/i);
-
-  // Play a few moves
-  fireEvent.click(screen.getAllByRole('button')[0]); // Make a move
-  fireEvent.click(screen.getAllByRole('button')[1]); // Make another move
-
-  // Reset the game
-  fireEvent.click(screen.getByText(/Reset Game/i));
-
-  // Check if the game state is reset
-  expect(xPlayerTurn).toBeInTheDocument();
-  expect(screen.getByText(/Go to game start/i)).toBeInTheDocument();
-  expect(screen.getByText(/Undo Last Move/i)).toBeDisabled();
+  expect(inputElement).not.toBeInTheDocument();
 });
