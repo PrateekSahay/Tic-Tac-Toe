@@ -14,7 +14,7 @@ const TicTacToeHome = () => {
     const value = e.target.value
      
     // Allow empty input or single-digit numbers from 1 to 9
-    if (value === "" || (/^[1-9]$/.test(value) && value.length <= 1)) {
+    if (value === "" || (/^[1-8]$/.test(value) && value.length <= 1)) {
             setBoardSize(value);
       }
   };
