@@ -60,7 +60,7 @@ const TicTacToeContainer = ({boardSize = 3}) => {
     ]);
     setStepNumber(0);
     setIsXNext(true);
-  }, []);
+  }, [boardSize]);
 
   return (
     <>            
